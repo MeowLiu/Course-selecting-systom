@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>(゜-゜)つ选课系统</title>
+    <link rel="stylesheet" href="{% static 'BootStrap/css/bootstrap.css' %}">
+    <style>
+        .center {
+            width: 300px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container panel panel-success center" style="margin-top: 200px;margin-left: auto;margin-right: auto">
+    <h3 class="text-center">(゜-゜)つ选课系统</h3>
+    <form method="post" class="form-group" novalidate>
+        {% csrf_token %}
+        {% for field in form %}
+            <!--  注册输入框  -->
+            <div class="form-group has-success">
+                {{ field.label_tag }}
+                {{ field }}
+                <span style="color: red">
+                    {% for error in field.errors %}
+                        {{ error }}
+                    {% endfor %}
+{#                    {{ field.errors.0 }}{{ field.errors.1 }}#}
+                </span>
+            </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-success btn-sm" style="width: 100%;margin-bottom: 15px;">注册</button>
+    </form>
+</div>
+{% if prompt %}
+    <div class="container panel panel-success center" style="margin-top: 15px;margin-left: auto;margin-right: auto;">
+        <p class="text-center" style="color: red">{{ prompt }}</p>
+    </div>
+{% endif %}
+<script src="{% static 'jQuery/jquery-3.7.0.js' %}"></script>
+<script src="{% static 'BootStrap/js/bootstrap.js' %}"></script>
+</body>
+</html>

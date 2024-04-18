@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>(゜-゜)つ选课系统</title>
+    <link rel="stylesheet" href="{% static 'BootStrap/css/bootstrap.css' %}">
+    <style>
+        .center {
+            width: 300px;
+            margin: auto;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container panel panel-primary center" style="margin-top: 200px;">
+    <h3 class="text-center">(゜-゜)つ选课系统</h3>
+    <form method="post" class="form-group" novalidate>
+        {% csrf_token %}
+        {% for field in form %}
+            {% if field.name == 'validcode' %}
+                <!--  验证码输入框  -->
+                <div class="form-group">
+                    {{ field.label_tag }}
+                    <div class="row">
+                        <div class="col col-md-6">
+                            {{ field }}
+                            <span style="color: red">
+                                {% for error in field.errors %}
+                                    {{ error }}
+                                {% endfor %}
+                            </span>
+                        </div>
+                        <div class="col col-md-6">
+                            <img src="{% url 'studentApp:CreateImgCode' %}" alt="图形验证码"
+                                 style="border: #9d9d9d solid 1px; width: 100%; height: 34px; border-radius: 5%;">
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <!--  其他输入框  -->
+                <div class="form-group">
+                    {{ field.label_tag }}
+                    {{ field }}
+                    <span style="color: red">
+                    {% for error in field.errors %}
+                        {{ error }}
+                    {% endfor %}
+                    </span>
+                </div>
+            {% endif %}
+
+        {% endfor %}
+        <button type="submit" class="btn btn-primary btn-sm" style="width: 100%;margin-bottom: 15px;">登录</button>
+    </form>
+</div>
+{% if prompt %}
+    <div class="container panel panel-success center" style="margin-top: 15px;">
+        <p class="text-center" style="color: red">{{ prompt }}</p>
+    </div>
+{% endif %}
+<script src="{% static 'jQuery/jquery-3.7.0.js' %}"></script>
+<script src="{% static 'BootStrap/js/bootstrap.js' %}"></script>
+</body>
+</html>

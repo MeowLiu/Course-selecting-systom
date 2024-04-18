@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container" style="width: 400px;margin-top: 100px;">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                个人信息
+            </div>
+
+            <div class="panel-body">
+                <form method="post" novalidate>
+                    {% csrf_token %}
+                    <table class="table">
+                        <tbody>
+                        <tr>
+                            <td>学号：{{ student_obj.id }}</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>用户名:<input style="border: none;outline: none"
+                                           name="new_acount_name"
+                                           value="{{ student_obj.acount_name }}"/>
+                            </td>
+                            <td>
+                                <button type="submit" class="btn btn-link" style="outline: none">修改</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>姓名：{{ student_obj.name }}</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>年龄：<input style="border: none;outline: none"
+                                          name="new_age"
+                                          value="{{ student_obj.age }}"/></td>
+                            <td>
+                                <button type="submit" class="btn  btn-link" style="outline: none;">修改
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>性别：<input style="border: none;outline: none"
+                                          name="new_gender"
+                                          value="{{ student_obj.gender }}"/>
+                            </td>
+                            <td>
+                                <button type="submit" class="btn btn-link" style="outline: none">修改</button>
+                            <td>
+                        </tr>
+                        <tr>
+                            <td>所在地：<input style="border: none;outline: none"
+                                           name="new_place"
+                                           value="{{ student_obj.place }}"/></td>
+                            <td>
+                                <button type="submit" class="btn btn-link" style="outline: none">修改</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                已选课程：
+                                {% for course in student_obj.course.all %}
+                                    {{ course.name }}
+                                {% endfor %}
+                            </td>
+                            <td></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+            <div class="panel-footer">
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

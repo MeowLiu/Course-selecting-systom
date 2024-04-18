@@ -1,0 +1,113 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>(゜-゜)つ选课系统</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'BootStrap/css/bootstrap.css' %}">
+    <style>
+        .navbar {
+            border-radius: 0;
+        }
+    </style>
+</head>
+<body>
+
+{#导航及导航栏#}
+<nav class="navbar navbar-default navbar-static-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">(゜-゜)つ选课系统</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li><a href="{% url 'homeApp:Home' %}">主页</a></li>
+            <li><a href="{% url 'courseApp:CourseCenter' %}">课程中心</a></li>
+            <li><a href="{% url 'studentApp:TeacherCenter' %}">教师中心</a></li>
+            {% if request.session.student_name %}
+                <li><a href="{% url 'studentApp:MyClassmates' %}">我的同学</a></li>
+            {% endif %}
+            <li><a href="{% url 'aboutApp:Us' %}">关于我们</a></li>
+        </ul>
+
+
+        {#    下面是搜索框    #}
+        <form class="navbar-form navbar-left" method="post" action="#" novalidate>
+            {% csrf_token %}
+            <div class="input-group">
+                <input type="text" name="search" class="form-control" placeholder="输入内容吧...">
+                <div class="input-group-btn">
+                    <button class="btn btn-primary" type="submit">搜索</button>
+                </div>
+            </div>
+        </form>
+        {#导航栏右侧#}
+        {% if not request.session.student_name %}
+            {#    右侧登录    #}
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="{% url 'studentApp:StudentLogin' %}">登录</a></li>
+            </ul>
+        {% else %}
+            {% if request.session.student_name %}
+                {#    右侧学生个人账户    #}
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false">学生{{ request.session.student_name }}<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{% url 'studentApp:PersonInfo' %}">个人信息</a></li>
+                            {#                            <li><a href="{% url 'studentApp:SelectedCourse' %}">已选课程</a></li>#}
+                            <li><a href="{% url 'studentApp:StudentLogin' %}">更换账号</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="{% url 'studentApp:ChangeCode' %}">修改密码</a></li>
+                            <li><a href="{% url 'studentApp:Logout' %}">退出登录</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            {% endif %}
+        {% endif %}
+    </div>
+</nav>
+
+{#用于继承的主体内容#}
+<div class="container">
+    {% block content %}
+
+    {% endblock %}
+</div>
+
+{#底部#}
+<nav class="container-fluid navbar-inverse">
+    <div class="container">
+        <ul class="nav navbar-nav">
+            <li><a href="#">本站相关</a></li>
+            <li><a href="#">加入我们</a></li>
+        </ul>
+    </div>
+    <div class="container">
+        <p class="text-center" style="color: white ;margin-top: 15px; margin-left: 15px;">
+            联系方式:2714106823@qq.com
+        </p>
+    </div>
+    <div class="container">
+        <p class="text-center" style="color: white ;margin-top: 15px; margin-left: 15px;">
+            声明：本网站是作者基于BootStrap搭建的
+        </p>
+    </div>
+    <div class="container">
+        <p class="text-center" style="color: white ;margin-top: 15px; margin-left: 15px;">
+            侵权必究
+        </p>
+    </div>
+
+</nav>
+
+
+<script src="{% static 'jQuery/jquery-3.7.0.js' %}"></script>
+<script src="{% static 'BootStrap/js/bootstrap.js' %}"></script>
+
+
+<script>
+
+</script>
+</body>
+</html>

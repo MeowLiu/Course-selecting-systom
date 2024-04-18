@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+    <div class="panel panel-info">
+
+        <div class="panel-heading">
+            学生信息
+        </div>
+        <div class="panel-body" style="height: 471px;">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>学号</th>
+                    <th>姓名</th>
+                    <th>年龄</th>
+                    <th>性别</th>
+                    <th>相同课程</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for student in current_page %}
+                    <tr>
+                        <td>{{ student.id }}</td>
+                        <td>{{ student.name }}</td>
+                        <td>{{ student.age }}</td>
+                        <td>{{ student.gender }}</td>
+                        <td>
+                            {% for course in student.course.all %}
+                                {% if course in selected_courses %}
+
+                                    {{ course.name }}
+
+                                {% endif %}
+                            {% endfor %}
+                        </td>
+                    </tr>
+                {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+        <div class="panel-footer">
+            {#尾部分页器#}
+            <nav aria-label="...">
+                <ul class="pagination pagination-lg">
+                    {% if current_page.has_previous %}
+                        <li>
+                            <a href="{% url 'studentApp:MyClassmates' %}?pagenum={{ current_page.previous_page_number }}"
+                               aria-label="Previous"><span aria-hidden="true">«</span></a></li>
+                    {% else %}
+                        <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">«</span></a>
+                        </li>
+                    {% endif %}
+                    {% for num in  page_range %}
+                        {% if num == current_page.number %}
+                            <li class="active"><a
+                                    href="{% url 'studentApp:MyClassmates' %}?pagenum={{ num }}">{{ num }}</a></li>
+                        {% else %}
+                            <li><a href="{% url 'studentApp:MyClassmates' %}?pagenum={{ num }}">{{ num }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                    {% if current_page.has_next %}
+                        <li><a href="{% url 'studentApp:MyClassmates' %}?pagenum={{ current_page.next_page_number }}"
+                               aria-label="Next"><span aria-hidden="true">»</span></a></li>
+                    {% else %}
+                        <li class="disabled"><a href="#" aria-label="Next"><span aria-hidden="true">»</span></a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+
+    </div>
+
+
+{% endblock %}

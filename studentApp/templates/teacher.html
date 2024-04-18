@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+    <div class="panel panel-primary">
+
+        <div class="panel-heading">
+            教师信息
+        </div>
+        <div class="panel-body" style="height: 435px;">
+            <div class="container">
+                {% for teacher in current_page %}
+                    {#  一行  #}
+                    <div class="row" style="margin-top: 15px;">
+                        <div class="col col-md-5">
+                            <img src="{% static 'images/avatar.jpg' %}" style="border-radius: 5%; width: 120px; height:120px "/>
+                        </div>
+
+                        <div class="col col-md-6">
+                            <p> 姓名：{{ teacher.name }}</p>
+
+                            <p> 简介：{{ teacher.introduce }}</p>
+                        </div>
+                        <div class="col col-md-1"></div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="panel-footer">
+            <nav aria-label="...">
+                <ul class="pagination pagination-lg">
+                    {% if current_page.has_previous %}
+                        <li>
+                            <a href="{% url 'studentApp:TeacherCenter' %}?pagenum={{ current_page.previous_page_number }}"
+                               aria-label="Previous"><span aria-hidden="true">«</span></a></li>
+                    {% else %}
+                        <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">«</span></a>
+                        </li>
+                    {% endif %}
+                    {% for num in  page_range %}
+                        {% if num == current_page.number %}
+                            <li class="active"><a
+                                    href="{% url 'studentApp:TeacherCenter' %}?pagenum={{ num }}">{{ num }}</a></li>
+                        {% else %}
+                            <li><a href="{% url 'studentApp:TeacherCenter' %}?pagenum={{ num }}">{{ num }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                    {% if current_page.has_next %}
+                        <li><a href="{% url 'studentApp:TeacherCenter' %}?pagenum={{ current_page.next_page_number }}"
+                               aria-label="Next"><span aria-hidden="true">»</span></a></li>
+                    {% else %}
+                        <li class="disabled"><a href="#" aria-label="Next"><span aria-hidden="true">»</span></a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+
+    </div>
+
+
+{% endblock %}
