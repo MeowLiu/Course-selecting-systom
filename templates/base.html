@@ -9,6 +9,9 @@
         .navbar {
             border-radius: 0;
         }
+        .red-background{
+            background-color:#941a23;
+        }
     </style>
 </head>
 <body>
@@ -17,15 +20,16 @@
 <nav class="navbar navbar-default navbar-static-top">
     <div class="container">
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">(゜-゜)つ选课系统</a>
+            <a class="navbar-brand" href="{% url "homeApp:Home" %}">(゜-゜)つ红色学习平台</a>
         </div>
         <ul class="nav navbar-nav">
             <li><a href="{% url 'homeApp:Home' %}">主页</a></li>
-            <li><a href="{% url 'courseApp:CourseCenter' %}">课程中心</a></li>
-            <li><a href="{% url 'studentApp:TeacherCenter' %}">教师中心</a></li>
-            {% if request.session.student_name %}
-                <li><a href="{% url 'studentApp:MyClassmates' %}">我的同学</a></li>
-            {% endif %}
+            <li><a href="{% url 'courseApp:CourseCenter' %}">红色书籍</a></li>
+            <li><a href="{% url 'studentApp:TeacherCenter' %}">红色电影</a></li>
+            {% comment %} {% if request.session.student_name %} {% endcomment %}
+                <li><a href="{% url 'studentApp:MyClassmates' %}">红色故事</a></li>
+                <li><a href="{% url 'studentApp:MyClassmates' %}">红色印记</a></li>
+            {% comment %} {% endif %} {% endcomment %}
             <li><a href="{% url 'aboutApp:Us' %}">关于我们</a></li>
         </ul>
 
@@ -36,7 +40,7 @@
             <div class="input-group">
                 <input type="text" name="search" class="form-control" placeholder="输入内容吧...">
                 <div class="input-group-btn">
-                    <button class="btn btn-primary" type="submit">搜索</button>
+                    <button class="btn btn-primary" type="submit" style="background-color: #9c3c3c">搜索</button>
                 </div>
             </div>
         </form>
@@ -76,7 +80,7 @@
 </div>
 
 {#底部#}
-<nav class="container-fluid navbar-inverse">
+<nav class="container-fluid navbar-inverse" style="background-color: #610c13;">
     <div class="container">
         <ul class="nav navbar-nav">
             <li><a href="#">本站相关</a></li>
@@ -107,7 +111,7 @@
 
 
 <script>
-
+    
 </script>
 </body>
 </html>

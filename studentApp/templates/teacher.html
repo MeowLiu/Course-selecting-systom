@@ -5,7 +5,7 @@
 
     <div class="panel panel-primary">
 
-        <div class="panel-heading">
+        <div class="panel-heading" style="background-color:#9c3c3c; color: white">
             教师信息
         </div>
         <div class="panel-body" style="height: 435px;">
@@ -32,7 +32,7 @@
                 <ul class="pagination pagination-lg">
                     {% if current_page.has_previous %}
                         <li>
-                            <a href="{% url 'studentApp:TeacherCenter' %}?pagenum={{ current_page.previous_page_number }}"
+                            <a style="color: #9c3c3c" href="{% url 'studentApp:TeacherCenter' %}?pagenum={{ current_page.previous_page_number }}"
                                aria-label="Previous"><span aria-hidden="true">«</span></a></li>
                     {% else %}
                         <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">«</span></a>
@@ -41,13 +41,14 @@
                     {% for num in  page_range %}
                         {% if num == current_page.number %}
                             <li class="active"><a
+                                    style="background-color: #9c3c3c; color: white;"
                                     href="{% url 'studentApp:TeacherCenter' %}?pagenum={{ num }}">{{ num }}</a></li>
                         {% else %}
-                            <li><a href="{% url 'studentApp:TeacherCenter' %}?pagenum={{ num }}">{{ num }}</a></li>
+                            <li><a style="color: #9c3c3c;"  href="{% url 'studentApp:TeacherCenter' %}?pagenum={{ num }}">{{ num }}</a></li>
                         {% endif %}
                     {% endfor %}
                     {% if current_page.has_next %}
-                        <li><a href="{% url 'studentApp:TeacherCenter' %}?pagenum={{ current_page.next_page_number }}"
+                        <li><a style="color: #9c3c3c" href="{% url 'studentApp:TeacherCenter' %}?pagenum={{ current_page.next_page_number }}"
                                aria-label="Next"><span aria-hidden="true">»</span></a></li>
                     {% else %}
                         <li class="disabled"><a href="#" aria-label="Next"><span aria-hidden="true">»</span></a></li>

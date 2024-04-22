@@ -4,11 +4,12 @@
 
     <div class="panel panel-warning">
 
-        <div class="panel-heading">
+        <div class="panel-heading" style="background-color:#9c3c3c; color: white">
+        {% comment %} <div class="panel-heading" > {% endcomment %}
             可选课程
         </div>
         <div class="panel-body">
-            <table class="table table-striped">
+            <table class="table table-striped table-hover">
                 <thead>
                 <tr>
                     <th>课程编号</th>
@@ -58,7 +59,7 @@
                 <ul class="pagination pagination-lg">
                     {% if current_page.has_previous %}
                         <li><a href="{% url 'courseApp:CourseCenter' %}?pagenum={{ current_page.previous_page_number }}"
-                               aria-label="Previous"><span aria-hidden="true">«</span></a></li>
+                               aria-label="Previous"><span style="color: #9c3c3c;" aria-hidden="true">«</span></a></li>
                     {% else %}
                         <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">«</span></a>
                         </li>
@@ -66,14 +67,15 @@
                     {% for num in  page_range %}
                         {% if num == current_page.number %}
                             <li class="active"><a
-                                    href="{% url 'courseApp:CourseCenter' %}?pagenum={{ num }}">{{ num }}</a></li>
+                                style="background-color: #9c3c3c; color: white;"
+                                href="{% url 'courseApp:CourseCenter' %}?pagenum={{ num }}">{{ num }}</a></li>
                         {% else %}
-                            <li><a href="{% url 'courseApp:CourseCenter' %}?pagenum={{ num }}">{{ num }}</a></li>
+                            <li><a style="color: #9c3c3c;" href="{% url 'courseApp:CourseCenter' %}?pagenum={{ num }}">{{ num }}</a></li>
                         {% endif %}
                     {% endfor %}
                     {% if current_page.has_next %}
                         <li><a href="{% url 'courseApp:CourseCenter' %}?pagenum={{ current_page.next_page_number }}"
-                               aria-label="Next"><span aria-hidden="true">»</span></a></li>
+                               aria-label="Next"><span style="color: #9c3c3c;" aria-hidden="true">»</span></a></li>
                     {% else %}
                         <li class="disabled"><a href="#" aria-label="Next"><span aria-hidden="true">»</span></a></li>
                     {% endif %}
