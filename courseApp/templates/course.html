@@ -6,7 +6,7 @@
 
         <div class="panel-heading" style="background-color:#9c3c3c; color: white">
         {% comment %} <div class="panel-heading" > {% endcomment %}
-            可选课程
+            红色书籍
         </div>
         <div class="panel-body">
             <table class="table table-striped table-hover">
@@ -31,16 +31,17 @@
                         {% comment %} <td>{{ course.credits }}</td> {% endcomment %}
                         <td>{{ course.place }}</td>
                         <td>{{ course.time }}</td>
-                        <td><a href="#">{{ course.teacher.name }}</a></td>
+                        {% comment %} <td><a href="#">{{ course.teacher.name }}</a></td> {% endcomment %}
+                        <td><a href="#">{{ course.introduction|truncatechars:10 }}...</a></td>
                         {% if request.session.student_name %}
                             <td>
                                 <a type="button"
                                    href="{% url 'courseApp:SelectCourse' %}?course_id={{ course.id }}"
                                    class="btn btn-xs btn-default">
                                     {% if course in selected_courses %}
-                                        退课
+                                        退书
                                     {% else %}
-                                        选课
+                                        选书
                                     {% endif %}
                                     {% if selected_courses_num == 5 %}
                                         <span style="color: red">数量以上限</span>
